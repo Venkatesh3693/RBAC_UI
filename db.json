@@ -1,0 +1,138 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "admin",
+      "role": "Admin",
+      "status": true
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "password": "user",
+      "role": "User",
+      "status": false
+    },
+    {
+      "id": "3",
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "password": "moderator",
+      "role": "Moderator",
+      "status": true
+    },
+    {
+      "id": "4",
+      "name": "Bob Brown",
+      "email": "bob@example.com",
+      "password": "guest",
+      "role": "Guest",
+      "status": true
+    },
+    {
+      "id": "5",
+      "name": "Eve White",
+      "email": "eve@example.com",
+      "password": "user",
+      "role": "User",
+      "status": false
+    },
+    {
+      "id": "71a1",
+      "name": "Venkatesh S S",
+      "email": "venkateshss241@gmail.com",
+      "password": "admin",
+      "role": "Admin",
+      "status": "true"
+    },
+    {
+      "id": "6505",
+      "name": "kratos",
+      "email": "vetrivenky2020@gmail.com",
+      "role": "Admin",
+      "status": "true",
+      "password": "kratos"
+    },
+    {
+      "id": "6767",
+      "name": "venky",
+      "email": "venkatesh4123@gmail.com",
+      "role": "User",
+      "status": "true",
+      "password": "kratos"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "Admin",
+      "permissions": [
+        "Read",
+        "Write",
+        "Delete",
+        "Manage Users",
+        "Manage Roles"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "User",
+      "permissions": [
+        "Read"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Moderator",
+      "permissions": [
+        "Read",
+        "Write",
+        "Delete"
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Guest",
+      "permissions": [
+        "Read"
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "id": "1",
+      "name": "Read"
+    },
+    {
+      "id": "2",
+      "name": "Write"
+    },
+    {
+      "id": "3",
+      "name": "Delete"
+    },
+    {
+      "id": "4",
+      "name": "Manage Users"
+    },
+    {
+      "id": "5",
+      "name": "Manage Roles"
+    }
+  ],
+  "notes": [
+    {
+      "id": "7b6b",
+      "title": "ttttttttt",
+      "content": "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddgggggggggg"
+    },
+    {
+      "id": "6231",
+      "title": "48 LAWS OF POWER ",
+      "content": "HSOHV;KSB;KJS;KJBV;KJADKJVBA'/JBC/KSBVBljBljsbvljBDljvbljsb ljdlvlk ld V,/ND /N VD?j V/M /KDZ NK/"
+    }
+  ]
+}

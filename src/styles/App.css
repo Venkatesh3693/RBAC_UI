@@ -1,0 +1,140 @@
+/* src/styles/App.css */
+body {
+  font-family: 'VT323', monospace;
+  background: linear-gradient(135deg, #1c1c1c, #111), url('/public/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background-blend-mode: overlay;  /* Ensure blend mode overlays the background properly */
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;  /* Ensure body takes up the full screen */
+  min-height: 100vh;  /* Ensure background covers the full viewport height */
+}
+
+nav {
+  background: rgba(34, 34, 34, 0.8); /* Semi-transparent background */
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1;  /* Ensure nav stays on top of the background */
+  position: relative;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;  /* Make the navbar responsive */
+}
+
+nav ul li {
+  margin: 5px 0;  /* Add margin for spacing between buttons on small screens */
+}
+
+nav ul li button {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  color: #00ffcc;
+  background: none;
+  border: 2px solid #00ffcc;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav ul li button:hover {
+  background: #00ffcc;
+  color: #222;
+}
+
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffcc;
+  text-align: center;  /* Center headings */
+}
+
+input, textarea {
+  font-family: 'VT323', monospace;
+  background: #333;
+  border: 2px solid #00ffcc;
+  border-radius: 8px;
+  color: #fff;
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 100%;  /* Full width inputs for responsiveness */
+}
+
+input::placeholder, textarea::placeholder {
+  color: #bbb;
+}
+
+button {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffcc;
+  background: none;
+  border: 2px solid #00ffcc;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+button:hover {
+  background: #00ffcc;
+  color: #222;
+}
+
+.container {
+  background: rgba(34, 34, 34, 0.8); /* Semi-transparent container */
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.note {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #222;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 2px solid #00ffcc;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav ul li {
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  nav ul li button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2rem;
+  }
+}
