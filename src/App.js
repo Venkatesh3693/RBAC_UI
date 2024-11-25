@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './pages/Home';
-import Notes from './pages/Notes';
+//import Notes from './pages/Notes';
 import Users from './pages/Users';
 import Roles from './pages/Roles';
 import Permissions from './pages/Permissions';
