@@ -1,4 +1,4 @@
-// src/components/UserManagement.js
+
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../firebaseConfig';

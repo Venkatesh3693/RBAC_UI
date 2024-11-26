@@ -1,22 +1,23 @@
-/* src/styles/App.css */
+/* retro futuristic design */
+
 body {
   font-family: 'VT323', monospace;
-  background: linear-gradient(135deg, #1c1c1c, #111), url('/public/background.jpg') no-repeat center center fixed;
+  background: linear-gradient(135deg, #1c1c1c, #111), url('/public/bg.jpg') no-repeat center center fixed;
   background-size: cover;
-  background-blend-mode: overlay;  /* Ensure blend mode overlays the background properly */
+  background-blend-mode: overlay;  
   color: #fff;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  position: relative;  /* Ensure body takes up the full screen */
-  min-height: 100vh;  /* Ensure background covers the full viewport height */
+  position: relative;  
+  min-height: 100vh;  
 }
 
 nav {
-  background: rgba(34, 34, 34, 0.8); /* Semi-transparent background */
+  background: rgba(34, 34, 34, 0.8); 
   padding: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1;  /* Ensure nav stays on top of the background */
+  z-index: 1;  
   position: relative;
 }
 
@@ -26,11 +27,11 @@ nav ul {
   margin: 0;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;  /* Make the navbar responsive */
+  flex-wrap: wrap;  
 }
 
 nav ul li {
-  margin: 5px 0;  /* Add margin for spacing between buttons on small screens */
+  margin: 5px 0;  
 }
 
 nav ul li button {
@@ -53,7 +54,7 @@ nav ul li button:hover {
 h1, h2, h3 {
   font-family: 'Orbitron', sans-serif;
   color: #00ffcc;
-  text-align: center;  /* Center headings */
+  text-align: center;  
 }
 
 input, textarea {
@@ -64,7 +65,7 @@ input, textarea {
   color: #fff;
   padding: 8px;
   margin-bottom: 10px;
-  width: 100%;  /* Full width inputs for responsiveness */
+  width: 100%;  
 }
 
 input::placeholder, textarea::placeholder {
@@ -88,7 +89,7 @@ button:hover {
 }
 
 .container {
-  background: rgba(34, 34, 34, 0.8); /* Semi-transparent container */
+  background: rgba(34, 34, 34, 0.8); 
   padding: 20px;
   max-width: 1200px;
   margin: auto;
@@ -117,10 +118,11 @@ th, td {
   text-align: left;
 }
 
-/* Media Queries for Responsiveness */
+
+
 @media (max-width: 768px) {
   nav ul {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   nav ul li {

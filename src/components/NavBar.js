@@ -13,9 +13,9 @@ const NavBar = ({ setUser }) => {
     <nav>
       <ul>
         <li><button onClick={() => navigate('/')}>Notes</button></li>
-        <li><button onClick={() => navigate('/users')}>User Management</button></li>
-        <li><button onClick={() => navigate('/roles')}>Role Management</button></li>
-        <li><button onClick={() => navigate('/permissions')}>Permission Management</button></li>
+        <li><button onClick={() => navigate('/users')}>User</button></li>
+        <li><button onClick={() => navigate('/roles')}>Role</button></li>
+        <li><button onClick={() => navigate('/permissions')}>Permission</button></li>
         <li><button onClick={handleLogout}>Home</button></li>
       </ul>
     </nav>
