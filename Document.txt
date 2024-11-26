@@ -48,6 +48,8 @@ RUN:
 
 $npm install firebase
 
+$npm install react modal
+
 $npm install react-router-dom
 
 $npm start  
