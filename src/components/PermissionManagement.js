@@ -1,11 +1,14 @@
+// src/components/PermissionManagement.js
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../firebaseConfig';
+import EditModal from './EditModal';
 
 const PermissionManagement = () => {
   const [permissions, setPermissions] = useState([]);
   const [newPermission, setNewPermission] = useState({ name: '' });
   const [editPermission, setEditPermission] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPermissions = async () => {
@@ -28,6 +31,7 @@ const PermissionManagement = () => {
     await updateDoc(permissionRef, updatedPermission);
     setPermissions(permissions.map(permission => (permission.id === id ? updatedPermission : permission)));
     setEditPermission(null);
+    setIsModalOpen(false);
   };
 
   const handleDeletePermission = async (id) => {
@@ -37,40 +41,27 @@ const PermissionManagement = () => {
 
   const handlePermissionChange = (e) => {
     const { name, value } = e.target;
-    if (editPermission) {
-      setEditPermission({ ...editPermission, [name]: value });
-    } else {
-      setNewPermission({ ...newPermission, [name]: value });
-    }
+    setEditPermission({ ...editPermission, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (editPermission) {
-      handleEditPermission(editPermission.id, editPermission);
-    } else {
-      handleAddPermission(newPermission);
-      setNewPermission({ name: '' });
-    }
-  };
-
-  const handleEditClick = (permission) => {
+  const openEditModal = (permission) => {
     setEditPermission(permission);
+    setIsModalOpen(true);
   };
 
   return (
     <div className="container">
       <h2>Permission Management</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleAddPermission}>
         <input
           type="text"
           name="name"
-          value={editPermission ? editPermission.name : newPermission.name}
-          onChange={handlePermissionChange}
+          value={newPermission.name}
+          onChange={(e) => setNewPermission({ ...newPermission, name: e.target.value })}
           placeholder="Permission Name"
         />
-        <button type="submit">{editPermission ? 'Edit Permission' : 'Add Permission'}</button>
+        <button type="submit">Add Permission</button>
       </form>
 
       <table>
@@ -85,13 +76,26 @@ const PermissionManagement = () => {
             <tr key={permission.id}>
               <td>{permission.name}</td>
               <td>
-                <button onClick={() => handleEditClick(permission)}>Edit</button>
+                <button onClick={() => openEditModal(permission)}>Edit</button>
                 <button onClick={() => handleDeletePermission(permission.id)}>Delete</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+
+      {editPermission && (
+        <EditModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          data={editPermission}
+          handleInputChange={handlePermissionChange}
+          handleSubmit={(e) => {
+            e.preventDefault();
+            handleEditPermission(editPermission.id, editPermission);
+          }}
+        />
+      )}
     </div>
   );
 };

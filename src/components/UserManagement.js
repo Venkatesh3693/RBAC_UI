@@ -1,11 +1,14 @@
+// src/components/UserManagement.js
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../firebaseConfig';
+import EditModal from './EditModal';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({ name: '', email: '', role: '', status: 'active', password: '' });
   const [editUser, setEditUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,6 +29,7 @@ const UserManagement = () => {
     await updateDoc(userRef, updatedUser);
     setUsers(users.map(user => (user.id === id ? updatedUser : user)));
     setEditUser(null);
+    setIsModalOpen(false);
   };
 
   const handleDeleteUser = async (id) => {
@@ -35,72 +39,56 @@ const UserManagement = () => {
 
   const handleUserChange = (e) => {
     const { name, value } = e.target;
-    if (editUser) {
-      setEditUser({ ...editUser, [name]: value });
-    } else {
-      setNewUser({ ...newUser, [name]: value });
-    }
+    setEditUser({ ...editUser, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (editUser) {
-      handleEditUser(editUser.id, editUser);
-    } else {
-      handleAddUser(newUser);
-      setNewUser({ name: '', email: '', role: '', status: 'active', password: '' });
-    }
-  };
-
-  const handleEditClick = (user) => {
+  const openEditModal = (user) => {
     setEditUser(user);
+    setIsModalOpen(true);
   };
 
   return (
     <div className="container">
       <h2>User Management</h2>
-      
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleAddUser}>
         <input
           type="text"
           name="name"
-          value={editUser ? editUser.name : newUser.name}
-          onChange={handleUserChange}
+          value={newUser.name}
+          onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
           placeholder="Name"
         />
         <input
           type="email"
           name="email"
-          value={editUser ? editUser.email : newUser.email}
-          onChange={handleUserChange}
+          value={newUser.email}
+          onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
           placeholder="Email"
         />
         <input
           type="text"
           name="role"
-          value={editUser ? editUser.role : newUser.role}
-          onChange={handleUserChange}
+          value={newUser.role}
+          onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
           placeholder="Role"
         />
         <input
           type="password"
           name="password"
-          value={editUser ? editUser.password : newUser.password}
-          onChange={handleUserChange}
+          value={newUser.password}
+          onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
           placeholder="Password"
         />
-        <label>
-          Status:
-          <select
-            name="status"
-            value={editUser ? editUser.status : newUser.status}
-            onChange={handleUserChange}
-          >
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-          </select>
-        </label>
-        <button type="submit">{editUser ? 'Edit User' : 'Add User'}</button>
+        <select
+          name="status"
+          value={newUser.status}
+          onChange={(e) => setNewUser({ ...newUser, status: e.target.value })}
+        >
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+        <button type="submit">Add User</button>
       </form>
 
       <table>
@@ -123,7 +111,7 @@ const UserManagement = () => {
               <td>{user.status === 'active' ? 'Active' : 'Inactive'}</td>
               <td>{user.password}</td>
               <td>
-                <button onClick={() => handleEditClick(user)}>Edit</button>
+                <button onClick={() => openEditModal(user)}>Edit</button>
                 <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
               </td>
             </tr>
@@ -132,48 +120,16 @@ const UserManagement = () => {
       </table>
 
       {editUser && (
-        <div>
-          <input
-            type="text"
-            name="name"
-            value={editUser.name}
-            onChange={handleUserChange}
-            placeholder="Name"
-          />
-          <input
-            type="email"
-            name="email"
-            value={editUser.email}
-            onChange={handleUserChange}
-            placeholder="Email"
-          />
-          <input
-            type="text"
-            name="role"
-            value={editUser.role}
-            onChange={handleUserChange}
-            placeholder="Role"
-          />
-          <input
-            type="password"
-            name="password"
-            value={editUser.password}
-            onChange={handleUserChange}
-            placeholder="Password"
-          />
-          <label>
-            Status:
-            <select
-              name="status"
-              value={editUser.status}
-              onChange={handleUserChange}
-            >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-            </select>
-          </label>
-          <button onClick={() => handleEditUser(editUser.id, editUser)}>Save</button>
-        </div>
+        <EditModal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          data={editUser}
+          handleInputChange={handleUserChange}
+          handleSubmit={(e) => {
+            e.preventDefault();
+            handleEditUser(editUser.id, editUser);
+          }}
+        />
       )}
     </div>
   );
